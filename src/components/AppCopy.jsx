@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormInput from './Form-input/form-input';
 import ContactList from './Contact-list/contact-list';
 import Filter from './Filter/filter';
 import { nanoid } from 'nanoid';
-
 import NotificationMessage from './notification-message/NotificationMessage';
 
 export const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+
   const sendContactData = data => {
     const isContact = contacts.find(el => el.number === data.number);
     if (isContact) return alert('Контакт Існує');
