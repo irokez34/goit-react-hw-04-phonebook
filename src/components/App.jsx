@@ -34,21 +34,14 @@ export const App = () => {
       }}
     >
       <h1>PhoneBook</h1>
-      <FormInput
-        
-        sendContactData={sendContactData}
-      />
+      <FormInput sendContactData={sendContactData} />
       <h2>Contacts</h2>
       <Filter change={filterContact} />
       {filteredContacts.length === 0 ? (
         <NotificationMessage message={`No contact ${filter}`} />
       ) : (
-        <ContactList
-          contacts={filteredContacts}
-          handleClick={deleteContact}
-        />
+        <ContactList contacts={filteredContacts} handleClick={deleteContact} />
       )}
     </div>
   );
 };
-

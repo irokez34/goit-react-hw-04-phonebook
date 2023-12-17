@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './form-input.css';
 
-const FormInput = ({sendContactData}) => {
+const FormInput = ({ sendContactData }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  // useEffect(() => {
-  //   setName('asd');
-  //   setNumber('asd');
-  // }, []);
-  const handleChange = (e) => {
-    console.log('change');
+  const handleChange = e => {
     const { value, name } = e.target;
     if (name === 'name') {
       setName(value);
@@ -18,7 +13,7 @@ const FormInput = ({sendContactData}) => {
       setNumber(value);
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     sendContactData({
       name: name,
@@ -59,30 +54,5 @@ const FormInput = ({sendContactData}) => {
     </form>
   );
 };
-
-// class FormInput extends React.Component {
-//   state = {
-//     name: '',
-//     number: '',
-//   };
-//   handleChange = ({ target: { value, name } }) => {
-//     this.setState({
-//       [name]: value,
-//     });
-//   };
-//   handleSubmit = e => {
-//     e.preventDefault();
-//     this.props.sendContactData({
-//       name: this.state.name,
-//       number: this.state.number,
-//     });
-//     this.setState({
-//       name: '',
-//       number: '',
-//     });
-//   };
-//   render() {
-//      }
-// }
 
 export default FormInput;
