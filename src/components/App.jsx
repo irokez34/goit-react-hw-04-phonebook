@@ -7,16 +7,29 @@ import { nanoid } from 'nanoid';
 import NotificationMessage from './notification-message/NotificationMessage';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const savedContanctsInLocalStore = JSON.parse(localStorage.getItem('contactsList')) || [];
+  const [contacts, setContacts] = useState(savedContanctsInLocalStore);
   const [filter, setFilter] = useState('');
   const sendContactData = data => {
     const isContact = contacts.find(el => el.number === data.number);
     if (isContact) return alert('Контакт Існує');
+    
     const newContact = { ...data, id: nanoid() };
     setContacts(prevState => [...prevState, newContact]);
+    const contactsFromLocalStorage =
+      JSON.parse(localStorage.getItem('contactsList')) || [];
+    const updatedContacts = [...contactsFromLocalStorage, newContact];
+
+    localStorage.setItem('contactsList', JSON.stringify(updatedContacts));
   };
   const deleteContact = id => {
     setContacts(prev => prev.filter(el => el.id !== id));
+    const contactsFromLocalStorage =
+      JSON.parse(localStorage.getItem('contactsList')) || [];
+    const updatedContacts = [
+      ...contactsFromLocalStorage.filter(el => el.id !== id),
+    ];
+    localStorage.setItem('contactsList', JSON.stringify(updatedContacts));
   };
   const filterContact = ({ target: { value } }) => setFilter(value);
   const filteredContacts = contacts.filter(contact =>
