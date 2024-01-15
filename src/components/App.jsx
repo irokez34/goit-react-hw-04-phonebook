@@ -20,20 +20,9 @@ export const App = () => {
 
     const newContact = { ...data, id: nanoid() };
     setContacts(prevState => [...prevState, newContact]);
-    const contactsFromLocalStorage =
-      JSON.parse(localStorage.getItem('contactsList')) || [];
-    const updatedContacts = [...contactsFromLocalStorage, newContact];
-
-    localStorage.setItem('contactsList', JSON.stringify(updatedContacts));
   };
   const deleteContact = id => {
     setContacts(prev => prev.filter(el => el.id !== id));
-    const contactsFromLocalStorage =
-      JSON.parse(localStorage.getItem('contactsList')) || [];
-    const updatedContacts = [
-      ...contactsFromLocalStorage.filter(el => el.id !== id),
-    ];
-    localStorage.setItem('contactsList', JSON.stringify(updatedContacts));
   };
   const filterContact = ({ target: { value } }) => setFilter(value);
   const filteredContacts = contacts.filter(contact =>
